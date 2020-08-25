@@ -1,2 +1,2 @@
-# IOC_IncompleteData
+# Inverse Optimal Control from Incomplete Trajectory Observations
 Update Code soon
