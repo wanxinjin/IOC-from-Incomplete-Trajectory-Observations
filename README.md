@@ -11,11 +11,11 @@ The current version of the project consists of three folders:
 * **_LQR_** : contains all source codes for  LQR examples. You can directly run each example.
 * **_RobotArm_** : contains all source codes for  robot arm examples. You can directly run each example
 
-Note that all the codes are implemented in MATLAB.
-
-## Dependency
-Prior to using OPTCON to solve your optimal control problems, make sure you have installed CasADi in your matlab. 
+Note that all the codes are implemented in MATLAB. Prior to using OPTCON to solve your optimal control problems, make sure you have installed CasADi in your MATLAB. 
 Please refer to https://web.casadi.org/get/ for how to install CasADi in your MATLAB.
+
+
+
 
 ## How to Run the Codes
 Directly run each script in LQR or RobotArm folder. Important lines in codes are commented. 
