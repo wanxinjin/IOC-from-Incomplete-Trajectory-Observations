@@ -84,7 +84,7 @@ sol=OCsolver_FixEnd(x0,xgoal,T,dyn,cost);
 clc
 
 % add the noise level
-sigma=1e-1;
+sigma=1e-3;
 sol.x=sol.x+sigma*randn(size(sol.x));
 sol.u=sol.u+sigma*randn(size(sol.u));
 
@@ -183,22 +183,22 @@ end
 
 %% solve the recovery matrix
 function x=SolveH(H,r)
-% [U,D,V]=svd(H);
-% v=V(:,end);
-% v=v(1:r);
-% v=v/sign(v(2));
-% x=v/sum(v);
-options = optimoptions('quadprog','Display','off');
-n=size(H,2);
-Aeq=ones(1,n);
-Aeq(r+1:end)=0;
-beq=1;
-lb=zeros(1,n);
-lb(r+1:end)=-inf;
-ub=ones(1,n);
-ub(r+1:end)=inf;
-x=quadprog(H'*H,[],[],[],Aeq,beq,lb,ub,[],options);
-x=x(1:r);
+[U,D,V]=svd(H);
+v=V(:,end);
+v=v(1:r);
+v=v/sign(v(2));
+x=v/sum(v);
+% options = optimoptions('quadprog','Display','off');
+% n=size(H,2);
+% Aeq=ones(1,n);
+% Aeq(r+1:end)=0;
+% beq=1;
+% lb=zeros(1,n);
+% lb(r+1:end)=-inf;
+% ub=ones(1,n);
+% ub(r+1:end)=inf;
+% x=quadprog(H'*H,[],[],[],Aeq,beq,lb,ub,[],options);
+% x=x(1:r);
 end
 
 %% evaluate the error index

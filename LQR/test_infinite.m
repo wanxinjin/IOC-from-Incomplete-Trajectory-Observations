@@ -8,9 +8,9 @@ addpath('../OPTCON')
 A=[-1 1;
   	0 1];
 B=[1,3]';
-Q=[0.6, 0;
+Q=[0.1, 0;
     0, 0.3];
-R=0.1;
+R=0.6;
 x0=[2,-2]';
 
 % solve the LQR problem

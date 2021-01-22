@@ -19,7 +19,7 @@ dfuFun = Function('dfu',{x,u},{jacobian(f,u)});
 
 %% setup the cost function
 features=[x(1)^2, x(2)^2, u^2]';
-weights=[0.6,0.3,0.1]';
+weights=[0.1,0.3,0.6]';
 % cost function
 cost= Function('cost',{x,u},{weights'*features}, {'X','U'}, {'c'});
 
@@ -30,7 +30,7 @@ sol=OCsolver_FreeEnd(x0,T,dyn,cost);
 clc
 
 %% do the inverse optimal control
-features=[x(1)^2, x(2)^2, u^2, 2*u^2]';
+features=[x(1)^2, x(2)^2, u^2, u^3]';
 r=4;
 % cost function
 phi=Function('feature',{x, u}, {features}, {'X','U'}, {'phi'});
@@ -43,10 +43,11 @@ l=1;
 H2=dfu'*dfx';
 H1=dfu'*dpx'+dpu';
 H=[H1,H2];
-rankH=rank(H);
+tol=1e-15;
+rankH=rank(H,tol);
 % solve the weights
 results=SolveH(H,r);
-for l=2:10
+for l=2:T-st
     [dfx,dfu,dpx,dpu]=DiffDynCost(st+l,dfxFun,dfuFun,dpxFun,dpuFun,sol);
     H1=[H1+H2*dpx';
         dfu'*dpx'+dpu'];
@@ -55,7 +56,7 @@ for l=2:10
     H=[H1 H2];
     % solve the weights
     results(:,end+1)=SolveH(H,r);
-    rankH(end+1)=rank(H);
+    rankH(end+1)=rank(H,tol);
 end
 
 figure(1)
@@ -63,7 +64,7 @@ plot(1:length(rankH),rankH,'LineWidth',3)
 ylabel('rank H','FontWeight','bold')
 grid on
 box on
-xlim([1 9])
+xlim([1 10])
 ylim([0,6])
 xlabel('Observation length $l$ ($t=5$)','FontWeight','bold','Interpreter','latex')
 

@@ -19,7 +19,7 @@ dfuFun = Function('dfu',{x,u},{jacobian(f,u)});
 
 %% setup the cost function
 features=[x(1)^2, x(2)^2, u^2]';
-weights=[0.6,0.3,0.1]';
+weights=[0.1,0.3,0.6]';
 % cost function
 cost= Function('cost',{x,u},{weights'*features}, {'X','U'}, {'c'});
 
@@ -37,7 +37,7 @@ phi=Function('feature',{x, u}, {features}, {'X','U'}, {'phi'});
 dpxFun=Function('dpx',{x,u},{jacobian(features,x)});
 dpuFun=Function('dpu',{x,u},{jacobian(features,u)});
 
-st=8;
+st=2;
 l=1;
 [dfx,dfu,dpx,dpu]=DiffDynCost(st+l,dfxFun,dfuFun,dpxFun,dpuFun,sol);
 H2=dfu'*dfx';
@@ -47,7 +47,7 @@ rankH=rank(H);
 % solve the weights
 results=SolveH(H,r);
 restuls_inverseKKT=SolveH(H1,r);
-for l=2:25
+for l=2:T-st
     [dfx,dfu,dpx,dpu]=DiffDynCost(st+l,dfxFun,dfuFun,dpxFun,dpuFun,sol);
     H1=[H1+H2*dpx';
         dfu'*dpx'+dpu'];
@@ -76,7 +76,7 @@ ylabel('$e_{\omega}$','Interpreter','latex')
 grid on
 box on
 ylim([0,1])
-xlabel('Observation length $l$ ($t=25$)','FontWeight','bold','Interpreter','latex')
+xlabel('Observation length $l$ ($t=40$)','FontWeight','bold','Interpreter','latex')
 
 
 

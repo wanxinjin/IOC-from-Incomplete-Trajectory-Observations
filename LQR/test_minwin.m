@@ -19,7 +19,7 @@ dfuFun = Function('dfu',{x,u},{jacobian(f,u)});
 
 %% setup the cost function
 features=[x(1)^2, x(2)^2, u^2]';
-weights=[0.6,0.3,0.1]';
+weights=[0.1,0.3,0.6]';
 r=3;
 % cost function
 phi=Function('feature',{x, u}, {features}, {'X','U'}, {'phi'});

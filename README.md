@@ -1,7 +1,7 @@
 ## Inverse Optimal Control from Incomplete Trajectory Observations
 
-This project contains the source codes for the paper: Inverse Optimal Control from Incomplete Trajectory Observations 
-by Wanxin Jin, Dana Kulic, Shaoshuai Mou, and Sandra Hirche. Please find the paper at https://arxiv.org/abs/1803.07696.
+This project contains the source codes for the paper: Inverse Optimal Control from Incomplete Trajectory Observations (Published in the 
+International Journal of Robotics Research) by Wanxin Jin, Dana Kulic, Shaoshuai Mou, and Sandra Hirche. Please find the paper at https://arxiv.org/abs/1803.07696.
 
 
 ### Folders
